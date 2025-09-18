@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  my-app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount your source code for live reloading in development
+      - ./src:/app/src
+      - ./pyproject.toml:/app/pyproject.toml
+    # Command for development with auto-reload (e.g., for FastAPI)
+    command: uvicorn src.my_app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      - ENVIRONMENT=development
